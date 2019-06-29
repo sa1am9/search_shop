@@ -3,14 +3,15 @@ from django.shortcuts import redirect
 from django.utils import timezone
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 
-from django.http import HttpResponse
 from .models import Product
 from django.shortcuts import render, get_object_or_404
 from .forms import PostForm
 
 
 
+@login_required
 def post_edit(request, pk):
     post = get_object_or_404(Product, pk=pk)
     if request.method == "POST":
@@ -26,12 +27,13 @@ def post_edit(request, pk):
     return render(request, 'post_edit.html', {'form': form})
 
 
+@login_required
 def post_new(request):
     if request.method == "POST":
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
-            post.author = request.user
+            post.borrower = request.user
             post.published_date = timezone.now()
             post.save()
             return redirect('post_list')

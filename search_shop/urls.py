@@ -27,6 +27,9 @@ urlpatterns = [
 ]
 urlpatterns += [
     url(r'^accounts/', include('django.contrib.auth.urls')),
+    url(r'^search/', include('search.urls', namespace='search')),
+
+
 ]
 if settings.DEBUG:
         urlpatterns += static(settings.MEDIA_URL,

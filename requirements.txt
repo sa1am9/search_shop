@@ -1,0 +1,6 @@
+Click==7.0
+Django==2.2.2
+Pillow==6.0.0
+pytz==2019.1
+six==1.12.0
+sqlparse==0.3.0
