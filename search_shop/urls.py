@@ -27,7 +27,9 @@ urlpatterns = [
 ]
 urlpatterns += [
     url(r'^accounts/', include('django.contrib.auth.urls')),
-    url(r'^search/', include('search.urls', namespace='search')),
+    url(r'^search/', include('search.urls')),
+
+
 
 
 ]

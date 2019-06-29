@@ -1,14 +1,14 @@
 from django.shortcuts import redirect
-
+import operator
 from django.utils import timezone
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-
+from django.db.models import Q
 from .models import Product
 from django.shortcuts import render, get_object_or_404
 from .forms import PostForm
-
+from django.views.generic import ListView
 
 
 @login_required
@@ -67,3 +67,4 @@ def registration(request):
     context = {'form': form}
     return render(request, 'registration/registration.html', context)
 # Create your views here.
+

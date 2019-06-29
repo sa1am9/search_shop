@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from django.db.models import Q
 from catalog.models import Product
+from django.http import JsonResponse
+
+
 
 def searchposts(request):
     if request.method == 'GET':
@@ -9,11 +12,11 @@ def searchposts(request):
         submitbutton= request.GET.get('submit')
 
         if query is not None:
-            lookups= Q(name__icontains=query) | Q(color__icontains=query)
+            lookups = Q(name__icontains=query)
 
-            results= Product.objects.filter(lookups).distinct()
+            results = Product.objects.filter(lookups).distinct()
 
-            context={'results': results,
+            context ={'results': results,
                      'submitbutton': submitbutton}
 
             return render(request, 'search_results.html', context)
@@ -23,3 +26,4 @@ def searchposts(request):
 
     else:
         return render(request, 'search_results.html')
+
